@@ -12,37 +12,31 @@ document.getElementById('points').textContent = `Points: ${points}`;
 document.getElementById('attempts').textContent = `Attempts: ${attempts}`;
 let level = 1;
 
-document.getElementById('spin-button').addEventListener('click', spinBoxes);
-document.getElementById('level-select').addEventListener('change', (event) => {
-    level = parseInt(event.target.value);
-    attempts = 8 * level; // Adjust attempts based on level
-    localStorage.setItem('attempts', attempts);
-    document.getElementById('attempts').textContent = `Attempts: ${attempts}`;
+document.addEventListener('DOMContentLoaded', () => {
+    // Existing game logic event listeners
+    document.getElementById('spin-button').addEventListener('click', spinBoxes);
+    document.getElementById('level-select').addEventListener('change', (event) => {
+        level = parseInt(event.target.value);
+        attempts = 8 * level; // Adjust attempts based on level
+        localStorage.setItem('attempts', attempts);
+        document.getElementById('attempts').textContent = `Attempts: ${attempts}`;
+    });
+    // Bind wallet and settings buttons after DOM is ready
+    document.getElementById('wallet-button-title').addEventListener('click', showWalletPage);
+    document.getElementById('settings-button').addEventListener('click', showSettingsPage);
+
+    // Bind bottom navbar event listeners for page switching
+    document.getElementById('nav-home').addEventListener('click', showHomePage);
+    document.getElementById('nav-earn').addEventListener('click', showEarnPage);
+    document.getElementById('nav-mempad').addEventListener('click', showMempadPage);
+    document.getElementById('nav-frens').addEventListener('click', showFrensPage);
+    document.getElementById('nav-wallet').addEventListener('click', showWalletPage);
 });
 
-document.getElementById('wallet-button-title').addEventListener('click', showWalletPage);
-
-function showWalletPage() {
-    const gameContainer = document.getElementById('game-container');
-    gameContainer.innerHTML = `
-        <!-- Wallet Page -->
-        <div class="wallet-page-header">
-            <select id="wallet-combobox">
-                <option selected>Choose an option</option>
-                <option value="1">Option 1</option>
-                <option value="2">Option 2</option>
-                <option value="3">Option 3</option>
-            </select>
-        </div>
-        <div class="wallet-page-content text-center">
-            <h2>Wallet Information</h2>
-            <p>Your coins: <span id="wallet-coins">0</span></p>
-            <button id="back-button"><i class="fas fa-arrow-left"></i></button>
-        </div>
-    `;
-    document.getElementById('back-button').addEventListener('click', () => {
-        location.reload();
-    });
+// Stub functions for navbar switching
+function showHomePage() {
+    // Reloads the home page (game interface)
+    location.reload();
 }
 
 function spinBoxes() {
@@ -64,15 +58,21 @@ function spinBoxes() {
             checkWin(boxes);
         }, boxes.length * 500); // Check win after all boxes have spun
     } else {
-        // Create a Bootstrap-styled alert for no attempts left with a frown icon
-        const noAttemptsAlert = document.createElement('div');
-        noAttemptsAlert.className = 'alert alert-danger animate-alert custom-alert';
-        noAttemptsAlert.innerHTML = '<strong><i class="fas fa-frown"></i> :(</strong> No more attempts left. Watch an ad or buy more attempts.';
-        document.getElementById('game-container').prepend(noAttemptsAlert);
-        setTimeout(() => {
-            noAttemptsAlert.classList.add('fade-out');
-            setTimeout(() => noAttemptsAlert.remove(), 1000);
-        }, 3000);
+        // Only display a new alert if one is not already shown.
+        const existingAlert = document.querySelector('.no-attempts-alert');
+        if (!existingAlert) {
+            const noAttemptsAlert = document.createElement('div');
+            noAttemptsAlert.className = 'alert alert-danger animate-alert custom-alert no-attempts-alert';
+            noAttemptsAlert.innerHTML = '<strong><i class="fas fa-frown"></i> :(</strong> No more attempts left. Watch an ad or buy more attempts.';
+            document.getElementById('game-container').prepend(noAttemptsAlert);
+            setTimeout(() => {
+                noAttemptsAlert.classList.add('fade-out');
+                setTimeout(() => noAttemptsAlert.remove(), 1000);
+            }, 3000);
+        } else {
+            // Re-display the existing alert if it exists (remove fade-out if needed).
+            existingAlert.classList.remove('fade-out');
+        }
     }
 }
 
@@ -80,7 +80,7 @@ function checkWin(boxes) {
     const firstIcon = boxes[0].className;
     const isWin = Array.from(boxes).every(box => box.className === firstIcon);
     if (isWin) {
-        // Create a Bootstrap-styled win alert with a dollar icon
+        // Create a Bootstrap-styled win alert with a dollar icon and new palette styling
         const winAlert = document.createElement('div');
         winAlert.className = 'alert alert-success animate-alert custom-alert';
         winAlert.innerHTML = '<strong><i class="fas fa-dollar-sign"></i> Congratulations!</strong> You won!';

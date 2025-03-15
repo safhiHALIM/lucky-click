@@ -5,7 +5,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #2c3e50;
+    background-color: #0D0B1E;  /* Violet Nuit for main background */
     font-family: 'Comic Sans MS', cursive, sans-serif;
     color: #ecf0f1;
 }
@@ -18,8 +18,8 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #34495e;
-    border: 2px solid #e74c3c;
+    background-color: #264653;  /* Bleu Pétrole for container background */
+    border: 2px solid #E63946;  /* Rouge Néon for border */
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     border-radius: 10px;
     padding: 20px;
@@ -83,10 +83,10 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #e74c3c;
+    background-color: #D8DEE9;  /* Blanc Glacé for boxes */
     border-radius: 10px;
     font-size: 40px;
-    color: #fff;
+    color: #0D0B1E;             /* Violet Nuit for text */
     transition: width 0.3s, height 0.3s; /* Smooth transition for size change */
 }
 
@@ -101,7 +101,7 @@ h1 {
 }
 
 #spin-button {
-    background-color: #e74c3c;
+    background-color: #E63946;  /* Rouge Néon for primary buttons */
     border: none;
     padding: 15px 30px;
     font-size: 18px;
@@ -118,7 +118,7 @@ h1 {
 }
 
 #spin-button:hover {
-    background-color: #c0392b;
+    background-color: #F4A261;  /* Orange Flamboyant for hover effect */
 }
 
 #settings-button {
@@ -158,9 +158,9 @@ h1 {
     padding: 10px;
     font-size: 16px;
     border-radius: 5px;
-    border: 2px solid #e74c3c;
-    background-color: #34495e;
-    color: #ecf0f1;
+    border: 2px solid #E63946;  /* Rouge Néon border */
+    background-color: #264653;   /* Bleu Pétrole background */
+    color: #D8DEE9;             /* Blanc Glacé for text */
 }
 
 #points, #attempts {
@@ -180,7 +180,7 @@ h1 {
 
 #wallet-button-title {
     background: transparent;
-    border: 1px solid #e74c3c;  /* using same color as spin button */
+    border: 1px solid #E63946;  /* Rouge Néon accent */
     border-radius: 50%;         /* circular shape */
     width: 50px;                /* set width for a perfect circle */
     height: 50px;               /* set height for a perfect circle */
@@ -188,14 +188,14 @@ h1 {
     justify-content: center;
     align-items: center;
     font-size: 20px;
-    color: #e74c3c;
+    color: #E63946;
     cursor: pointer;
     transition: color 0.3s, border-color 0.3s;
 }
 
 #wallet-button-title:hover {
-    color: #c0392b;
-    border-color: #c0392b;
+    color: #2A9D8F;  /* Vert Émeraude on hover */
+    border-color: #2A9D8F;
 }
 
 .animate-alert {
@@ -215,13 +215,19 @@ h1 {
 }
 
 .custom-alert {
-    background-color: #e74c3c !important;  /* same color as spin button */
-    color: #fff !important;
-    border-color: #c0392b !important;
+    background-color: #E9C46A !important;  /* Jaune Doré for win alerts */
+    border-color: #F4A261 !important;        /* Orange Flamboyant for border */
+    color: #0D0B1E !important;               /* Violet Nuit for text */
     font-size: 24px;
     text-align: center;
     padding: 20px;
     border-radius: 5px;
+    /* Floating properties removed:
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999; */
 }
 
 .fade-out {
@@ -258,4 +264,41 @@ h1 {
 
 #back-button:hover {
     background-color: #c0392b;
+}
+
+/* Additional class for no attempts alert using Argent Métallisé */
+.no-attempts-alert {
+    background-color: #E63946 !important;  /* Rouge Néon for no-attempts alerts */
+    border-color: #F4A261 !important;        /* Orange Flamboyant for border */
+    color: #D8DEE9 !important;               /* Blanc Glacé for text */
+}
+
+/* Navbar styling */
+#bottom-navbar {
+    background-color: #264653;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+#bottom-navbar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+}
+#bottom-navbar li {
+    display: inline;
+}
+#bottom-navbar a {
+    display: block;
+    padding: 10px 15px;
+    color: #D8DEE9;
+    text-decoration: none;
+    font-size: 16px;
+    text-align: center;
+}
+#bottom-navbar a:hover {
+    color: #2A9D8F;
 }
